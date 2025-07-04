@@ -1,11 +1,22 @@
+require('dotenv').config();
+
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.get('/', (req, res) => {
-  res.send('Hello World');
-});
+const { connectToServer } = require('./db/conn');
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+const contactsRouter = require('./routes/contacts');
+
+app.use(express.json());
+
+app.use('/contacts', contactsRouter);
+
+connectToServer().then(() => {
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running on port ${PORT}`);
+  });
+}).catch(err => {
+  console.error('❌ Failed to connect to database. Server not started.');
+  console.error(err);
 });

@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/darma2006/contacts-api#readme",
   "dependencies": {
-    "express": "^5.1.0"
+    "dotenv": "^17.0.1",
+    "express": "^5.1.0",
+    "mongodb": "^6.17.0"
   }
 }
